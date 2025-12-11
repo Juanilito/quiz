@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
+import ThemeToggle from "@/components/ThemeToggle";
 import "./globals.css";
 
 const rubik = Rubik({
@@ -33,17 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rubik.variable} ${jetbrainsMono.variable} ${notoSansJP.variable} antialiased bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen`}
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)
-          `,
-          backgroundAttachment: 'fixed'
-        }}
+        className={`${rubik.variable} ${jetbrainsMono.variable} ${notoSansJP.variable} antialiased min-h-screen relative theme-crystal overflow-hidden`}
       >
-        <div className="absolute inset-0 bg-dots opacity-20"></div>
+        <div className="absolute inset-0 bg-dots opacity-20 pointer-events-none" />
+        <ThemeToggle />
         {children}
       </body>
     </html>

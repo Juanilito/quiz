@@ -17,6 +17,15 @@
   --glow-shadow-purple: 0 0 20px rgba(155, 89, 182, 0.3);
   --glow-shadow-blue: 0 0 20px rgba(52, 152, 219, 0.3);
   --glow-shadow-cyan: 0 0 20px rgba(0, 255, 255, 0.3);
+
+  --crystal-bg-1: #061420;
+  --crystal-bg-2: #0b1f2f;
+  --crystal-bg-3: #0f2f3c;
+  --crystal-accent: #7de2ff;
+  --crystal-accent-2: #34d399;
+  --crystal-foreground: #e3f6ff;
+  --crystal-card: rgba(9, 29, 42, 0.82);
+  --crystal-glow: 0 0 28px rgba(125, 226, 255, 0.35), 0 0 18px rgba(52, 211, 153, 0.25);
 }
 
 @theme inline {
@@ -37,6 +46,56 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Themes */
+body.theme-anime {
+  background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.28) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.28) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.28) 0%, transparent 50%),
+              linear-gradient(135deg, #0a0a13 0%, #0f1020 40%, #0a0a13 100%);
+  color: var(--foreground);
+}
+
+body.theme-crystal {
+  background: radial-gradient(circle at 18% 32%, rgba(125, 226, 255, 0.2) 0%, transparent 45%),
+              radial-gradient(circle at 82% 68%, rgba(52, 211, 153, 0.18) 0%, transparent 52%),
+              radial-gradient(circle at 45% 50%, rgba(125, 226, 255, 0.12) 0%, transparent 55%),
+              linear-gradient(140deg, var(--crystal-bg-1) 0%, var(--crystal-bg-2) 42%, var(--crystal-bg-3) 100%);
+  color: var(--crystal-foreground);
+}
+
+body.theme-crystal .anime-text-gradient {
+  background: linear-gradient(135deg, var(--crystal-accent), #9ef7e5, var(--crystal-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.theme-crystal .anime-text-gradient-2 {
+  background: linear-gradient(135deg, #9ef7e5, var(--crystal-accent), #7de2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.theme-crystal .anime-glow {
+  box-shadow: var(--crystal-glow);
+}
+
+body.theme-crystal .anime-glow-purple,
+body.theme-crystal .anime-glow-blue,
+body.theme-crystal .anime-glow-cyan {
+  box-shadow: var(--crystal-glow);
+}
+
+body.theme-crystal .bg-dots {
+  opacity: 0.15;
+}
+
+body.theme-crystal .backdrop-blur-xl {
+  background: linear-gradient(150deg, rgba(9, 29, 42, 0.9), rgba(9, 35, 48, 0.78));
+  border-color: rgba(125, 226, 255, 0.14);
 }
 
 /* Anime-style glow effects */
