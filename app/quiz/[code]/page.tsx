@@ -396,7 +396,7 @@ export default function QuizPage() {
         },
         (payload) => {
           if (!realtimeWorking) {
-            realtimeWorking = true;
+          realtimeWorking = true;
             console.log('✅ Participant: Realtime answers now working, stopping polling');
             if (stopPolling && pollingActive) {
               stopPolling();
@@ -453,25 +453,25 @@ export default function QuizPage() {
         console.log('🔄 Participant: Starting answers polling fallback');
         pollingActive = true;
         stopPolling = realtimeFallback.pollAnswers(
-          session.id,
-          participant.id,
-          session.current_question_index,
-          (data) => {
+      session.id,
+      participant.id,
+      session.current_question_index,
+      (data) => {
             if (!realtimeWorking) { // Only use polling data if realtime isn't working
               console.log('📝 Participant: Answer update received via polling');
-              if (data) {
-                setHasAnswered(true);
-                if (data.answer === 'timeout') {
-                  setSelectedAnswer(null);
-                } else {
-                  const parsed = parseInt(data.answer);
-                  setSelectedAnswer(isNaN(parsed) ? null : parsed);
-                }
-                setLastUpdate(new Date());
-              }
+          if (data) {
+            setHasAnswered(true);
+            if (data.answer === 'timeout') {
+              setSelectedAnswer(null);
+            } else {
+              const parsed = parseInt(data.answer);
+              setSelectedAnswer(isNaN(parsed) ? null : parsed);
             }
+                setLastUpdate(new Date());
           }
-        );
+        }
+      }
+    );
       }
     };
 
@@ -490,7 +490,7 @@ export default function QuizPage() {
         answerChannelRef.current = null;
       }
       if (stopPolling) {
-        stopPolling();
+      stopPolling();
         stopPolling = null;
         pollingActive = false;
       }
@@ -641,8 +641,11 @@ export default function QuizPage() {
 
   if (isLoading || !session || !participant) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200">
-        <div className="text-2xl font-bold text-purple-800">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+          <div className="text-xl font-bold text-cyan-400 cyberpunk-flicker">Loading Battle Arena...</div>
+        </div>
       </div>
     );
   }
@@ -669,11 +672,41 @@ export default function QuizPage() {
 
   if (isWaiting) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200">
-        <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-8 text-center shadow-2xl border-4 border-purple-400">
-          <h2 className="mb-4 text-3xl font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 bg-clip-text text-transparent">⏳ Waiting for Quiz to Start</h2>
-          <p className="mb-2 text-xl font-bold text-purple-800">Hello, {participant.name}! 👋</p>
-          <p className="text-lg font-semibold text-purple-700">The host will start the quiz soon.</p>
+      <div className="flex min-h-screen items-center justify-center p-4 relative">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl anime-float"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl anime-float" style={{animationDelay: '1.5s'}}></div>
+        </div>
+
+        <div className="w-full max-w-md relative z-10">
+          <div className="rounded-3xl backdrop-blur-xl p-8 text-center border border-white/10 anime-glow"
+               style={{
+                 background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%)',
+                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 107, 157, 0.1)'
+               }}>
+            <div className="mb-6">
+              <h2 className="text-3xl font-black anime-text-gradient-2 mb-2">⏳ 待機中</h2>
+              <div className="text-cyan-400 font-mono text-sm">Waiting for Battle to Start</div>
+            </div>
+            <div className="mb-6">
+              <div className="text-2xl font-bold text-white mb-2">
+                こんにちは、{participant.name}！👋
+              </div>
+              <div className="text-gray-400 text-sm">
+                Hello, {participant.name}! ⚡
+              </div>
+            </div>
+            <p className="text-lg font-semibold text-cyan-300">ホストがクイズを開始するまでお待ちください。</p>
+
+            {/* Floating particles effect */}
+            <div className="absolute -inset-4 pointer-events-none">
+              <div className="absolute top-4 left-4 w-2 h-2 bg-pink-400 rounded-full opacity-60 anime-float"></div>
+              <div className="absolute top-8 right-8 w-1 h-1 bg-cyan-400 rounded-full opacity-40 anime-float" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-50 anime-float" style={{animationDelay: '1.5s'}}></div>
+              <div className="absolute bottom-4 right-4 w-2 h-2 bg-cyan-400 rounded-full opacity-70 anime-float" style={{animationDelay: '2.5s'}}></div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -687,17 +720,31 @@ export default function QuizPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200 p-4 md:p-8">
-      <div className="mx-auto max-w-2xl">
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent md:text-3xl">
-            👤 {participant.name}
-          </h1>
-          <div className="flex flex-col items-end gap-1">
-            <div className="text-base font-mono font-extrabold text-purple-700 bg-yellow-200 px-3 py-1 rounded-lg border-2 border-purple-400 md:text-lg">
-              {code}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 md:p-8 relative">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl anime-float"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl anime-float" style={{animationDelay: '1.5s'}}></div>
+      </div>
+
+      <div className="mx-auto max-w-2xl relative z-10">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center anime-glow-blue">
+              <span className="text-white font-bold text-xl">⚔️</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div>
+              <h1 className="text-2xl font-black anime-text-gradient md:text-3xl">
+                {participant.name}
+              </h1>
+              <div className="text-sm text-cyan-400 font-mono">プレイヤー</div>
+            </div>
+          </div>
+          <div className="flex flex-col items-end gap-3">
+            <div className="font-mono font-bold text-cyan-300 bg-slate-800/80 px-4 py-2 rounded-xl border border-cyan-400/50 anime-glow-blue backdrop-blur-sm">
+              CODE: {code}
+            </div>
+            <div className="flex items-center gap-3">
               <ConnectionStatus isRealtime={useRealtime} lastUpdate={lastUpdate} />
               <button
                 onClick={() => {
@@ -705,63 +752,83 @@ export default function QuizPage() {
                   loadSession();
                   setLastUpdate(new Date());
                 }}
-                className="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                className="text-sm bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 anime-glow-blue border border-blue-400/50"
               >
-                🔄 Refresh
+                <span className="flex items-center gap-1">
+                  <span>🔄</span>
+                  <span>REFRESH</span>
+                </span>
               </button>
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-6 shadow-2xl border-4 border-purple-300 md:p-8">
-          <div className="mb-4 flex items-center justify-between">
-            <span className="text-lg font-bold text-purple-700">
-              Question {questionIndex + 1} of {TOTAL_QUESTIONS}
-            </span>
-            <span className="text-2xl font-mono font-extrabold text-pink-600 bg-yellow-200 px-4 py-2 rounded-xl border-2 border-pink-400">
-              ⏱️ {Math.ceil(timeRemaining / 1000)}s
-            </span>
+        <div className="rounded-2xl backdrop-blur-xl p-6 shadow-2xl border border-white/10 anime-glow md:p-8"
+             style={{
+               background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%)',
+               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(155, 89, 182, 0.2)'
+             }}>
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center anime-glow-blue">
+                <span className="text-white font-bold text-sm">Q</span>
+              </div>
+              <span className="text-lg font-bold text-cyan-400 font-mono">
+                問題 {questionIndex + 1} / {TOTAL_QUESTIONS}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-sm text-gray-400">残り時間</div>
+              <span className="text-2xl font-mono font-bold text-pink-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-pink-400/50 anime-glow backdrop-blur-sm">
+                ⏱️ {Math.ceil(timeRemaining / 1000)}s
+              </span>
+            </div>
           </div>
-          
-          <div className="mb-6 h-4 w-full overflow-hidden rounded-full bg-pink-200 border-2 border-pink-400">
+
+          <div className="mb-8 h-4 w-full overflow-hidden rounded-full bg-slate-700 border-2 border-cyan-400/50">
             <div
-              className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-500 transition-all duration-100"
+              className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 transition-all duration-100 anime-glow"
               style={{ width: `${progress}%` }}
             />
           </div>
 
-          <h2 className="mb-6 text-2xl font-extrabold text-purple-900 md:text-3xl">
+          <h2 className="mb-8 text-2xl font-bold text-white leading-tight md:text-3xl">
             {question.question}
           </h2>
-          
+
           <div className="space-y-4">
             {question.options.map((option, idx) => {
               const isSelected = selectedAnswer === idx;
               const isCorrect = idx === question.correctAnswer;
               const showResult = hasAnswered && isCorrect;
-              
-              let bgGradient = 'bg-gradient-to-r from-purple-100 to-pink-100';
-              let borderColor = 'border-purple-300';
-              let textColor = 'text-purple-900';
-              
+
+              let bgGradient = 'bg-gradient-to-r from-slate-700/80 to-slate-800/80';
+              let borderColor = 'border-gray-600';
+              let textColor = 'text-gray-300';
+              let glowClass = '';
+
               if (isSelected && !hasAnswered) {
-                bgGradient = 'bg-gradient-to-r from-pink-300 to-purple-300';
-                borderColor = 'border-pink-500';
-                textColor = 'text-purple-900';
+                bgGradient = 'bg-gradient-to-r from-pink-500/20 to-purple-500/20';
+                borderColor = 'border-pink-400';
+                textColor = 'text-white';
+                glowClass = 'anime-glow';
               } else if (isSelected && hasAnswered) {
                 if (isCorrect) {
-                  bgGradient = 'bg-gradient-to-r from-green-300 to-emerald-300';
-                  borderColor = 'border-green-500';
-                  textColor = 'text-green-900';
+                  bgGradient = 'bg-gradient-to-r from-green-900/80 to-emerald-900/80';
+                  borderColor = 'border-green-400';
+                  textColor = 'text-green-300';
+                  glowClass = 'anime-glow';
                 } else {
-                  bgGradient = 'bg-gradient-to-r from-red-300 to-pink-300';
-                  borderColor = 'border-red-500';
-                  textColor = 'text-red-900';
+                  bgGradient = 'bg-gradient-to-r from-red-900/80 to-pink-900/80';
+                  borderColor = 'border-red-400';
+                  textColor = 'text-red-300';
+                  glowClass = 'anime-glow';
                 }
               } else if (showResult) {
-                bgGradient = 'bg-gradient-to-r from-green-300 to-emerald-300';
-                borderColor = 'border-green-500';
-                textColor = 'text-green-900';
+                bgGradient = 'bg-gradient-to-r from-green-900/80 to-emerald-900/80';
+                borderColor = 'border-green-400';
+                textColor = 'text-green-300';
+                glowClass = 'anime-glow';
               }
 
               return (
@@ -769,19 +836,19 @@ export default function QuizPage() {
                   key={idx}
                   onClick={() => handleAnswer(idx)}
                   disabled={hasAnswered}
-                  className={`w-full rounded-xl border-4 p-5 text-left text-lg font-bold transition-all duration-200 ${
+                  className={`w-full rounded-xl border-2 p-5 text-left text-lg font-bold transition-all duration-300 backdrop-blur-sm ${glowClass} ${
                     hasAnswered ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-105 hover:shadow-lg transform'
-                  } ${bgGradient} ${borderColor} ${textColor}`}
+                  } ${bgGradient} ${borderColor} ${textColor} hover:border-cyan-400`}
                 >
-                  <span className="font-extrabold">{String.fromCharCode(65 + idx)}. </span>
-                  {option}
+                  <span className="font-mono font-bold text-cyan-400 mr-3">{String.fromCharCode(65 + idx)}. </span>
+                  <span>{option}</span>
                   {isSelected && hasAnswered && (
                     <span className="ml-3 text-xl">
-                      {isCorrect ? '✓ Correct!' : '✗ Wrong'}
+                      {isCorrect ? '✓ 正解！' : '✗ 不正解'}
                     </span>
                   )}
                   {showResult && !isSelected && (
-                    <span className="ml-3 text-xl text-green-700">✓ Correct Answer</span>
+                    <span className="ml-3 text-xl text-green-400">✓ 正解の答え</span>
                   )}
                 </button>
               );
@@ -789,13 +856,13 @@ export default function QuizPage() {
           </div>
 
           {hasAnswered && (
-            <div className="mt-6 rounded-xl bg-gradient-to-r from-purple-200 to-pink-200 p-5 text-center border-4 border-purple-400">
-              <p className="text-xl font-bold text-purple-900">
+            <div className="mt-6 rounded-xl bg-gradient-to-r from-slate-700/80 to-slate-800/80 p-5 text-center border-2 border-purple-400/50 backdrop-blur-sm">
+              <p className="text-xl font-bold text-cyan-300">
                 {selectedAnswer === null
-                  ? '⏰ Time\'s up! No answer submitted. Waiting for next question...'
+                  ? '⏰ タイムアップ！ 回答なし。次の問題を待っています...'
                   : selectedAnswer === question.correctAnswer
-                  ? '🎉 Great job! Waiting for other participants...'
-                  : '✅ Answer submitted. Waiting for next question...'}
+                  ? '🎉 素晴らしい！ 他の参加者を待っています...'
+                  : '✅ 回答送信完了。次の問題を待っています...'}
               </p>
             </div>
           )}
