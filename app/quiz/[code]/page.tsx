@@ -641,8 +641,8 @@ export default function QuizPage() {
 
   if (isLoading || !session || !participant) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200">
-        <div className="text-2xl font-bold text-purple-800">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
+        <div className="text-2xl font-bold text-amber-200">Syncing with the Morphin Grid...</div>
       </div>
     );
   }
@@ -669,11 +669,11 @@ export default function QuizPage() {
 
   if (isWaiting) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200">
-        <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-8 text-center shadow-2xl border-4 border-purple-400">
-          <h2 className="mb-4 text-3xl font-extrabold bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 bg-clip-text text-transparent">⏳ Waiting for Quiz to Start</h2>
-          <p className="mb-2 text-xl font-bold text-purple-800">Hello, {participant.name}! 👋</p>
-          <p className="text-lg font-semibold text-purple-700">The host will start the quiz soon.</p>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
+        <div className="rounded-2xl bg-slate-900/80 backdrop-blur-sm p-8 text-center shadow-2xl border-4 border-amber-300/60">
+          <h2 className="mb-4 text-3xl font-extrabold bg-gradient-to-r from-red-500 via-amber-400 to-blue-500 bg-clip-text text-transparent">⏳ Waiting to Morph</h2>
+          <p className="mb-2 text-xl font-bold text-amber-100">Hello, {participant.name}! 👋</p>
+          <p className="text-lg font-semibold text-emerald-200">Zordon will start the quiz soon.</p>
         </div>
       </div>
     );
@@ -687,14 +687,14 @@ export default function QuizPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 p-4 md:p-8">
       <div className="mx-auto max-w-2xl">
         <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent md:text-3xl">
-            👤 {participant.name}
+          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-red-500 via-amber-400 to-blue-500 bg-clip-text text-transparent md:text-3xl">
+            🐉 {participant.name}
           </h1>
           <div className="flex flex-col items-end gap-1">
-            <div className="text-base font-mono font-extrabold text-purple-700 bg-yellow-200 px-3 py-1 rounded-lg border-2 border-purple-400 md:text-lg">
+            <div className="text-base font-mono font-extrabold text-gray-900 bg-amber-300 px-3 py-1 rounded-lg border-2 border-amber-200 md:text-lg">
               {code}
             </div>
             <div className="flex items-center gap-2">
@@ -705,7 +705,7 @@ export default function QuizPage() {
                   loadSession();
                   setLastUpdate(new Date());
                 }}
-                className="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                className="text-xs bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
               >
                 🔄 Refresh
               </button>
@@ -713,24 +713,24 @@ export default function QuizPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-6 shadow-2xl border-4 border-purple-300 md:p-8">
+        <div className="rounded-2xl bg-slate-900/85 backdrop-blur-sm p-6 shadow-2xl border-4 border-amber-300/60 md:p-8">
           <div className="mb-4 flex items-center justify-between">
-            <span className="text-lg font-bold text-purple-700">
+            <span className="text-lg font-bold text-amber-200">
               Question {questionIndex + 1} of {TOTAL_QUESTIONS}
             </span>
-            <span className="text-2xl font-mono font-extrabold text-pink-600 bg-yellow-200 px-4 py-2 rounded-xl border-2 border-pink-400">
+            <span className="text-2xl font-mono font-extrabold text-gray-900 bg-amber-300 px-4 py-2 rounded-xl border-2 border-amber-200">
               ⏱️ {Math.ceil(timeRemaining / 1000)}s
             </span>
           </div>
           
-          <div className="mb-6 h-4 w-full overflow-hidden rounded-full bg-pink-200 border-2 border-pink-400">
+          <div className="mb-6 h-4 w-full overflow-hidden rounded-full bg-slate-800 border-2 border-amber-300/60">
             <div
-              className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-500 transition-all duration-100"
+              className="h-full bg-gradient-to-r from-red-500 via-amber-400 to-blue-500 transition-all duration-100"
               style={{ width: `${progress}%` }}
             />
           </div>
 
-          <h2 className="mb-6 text-2xl font-extrabold text-purple-900 md:text-3xl">
+          <h2 className="mb-6 text-2xl font-extrabold text-amber-100 md:text-3xl">
             {question.question}
           </h2>
           
@@ -740,28 +740,28 @@ export default function QuizPage() {
               const isCorrect = idx === question.correctAnswer;
               const showResult = hasAnswered && isCorrect;
               
-              let bgGradient = 'bg-gradient-to-r from-purple-100 to-pink-100';
-              let borderColor = 'border-purple-300';
-              let textColor = 'text-purple-900';
+              let bgGradient = 'bg-gradient-to-r from-slate-800 to-slate-900';
+              let borderColor = 'border-amber-300/40';
+              let textColor = 'text-amber-100';
               
               if (isSelected && !hasAnswered) {
-                bgGradient = 'bg-gradient-to-r from-pink-300 to-purple-300';
-                borderColor = 'border-pink-500';
-                textColor = 'text-purple-900';
+                bgGradient = 'bg-gradient-to-r from-red-500 to-amber-400';
+                borderColor = 'border-amber-200';
+                textColor = 'text-gray-900';
               } else if (isSelected && hasAnswered) {
                 if (isCorrect) {
-                  bgGradient = 'bg-gradient-to-r from-green-300 to-emerald-300';
-                  borderColor = 'border-green-500';
-                  textColor = 'text-green-900';
+                  bgGradient = 'bg-gradient-to-r from-emerald-500 to-green-400';
+                  borderColor = 'border-emerald-300';
+                  textColor = 'text-emerald-900';
                 } else {
-                  bgGradient = 'bg-gradient-to-r from-red-300 to-pink-300';
+                  bgGradient = 'bg-gradient-to-r from-slate-800 to-slate-900';
                   borderColor = 'border-red-500';
-                  textColor = 'text-red-900';
+                  textColor = 'text-amber-100';
                 }
               } else if (showResult) {
-                bgGradient = 'bg-gradient-to-r from-green-300 to-emerald-300';
-                borderColor = 'border-green-500';
-                textColor = 'text-green-900';
+                bgGradient = 'bg-gradient-to-r from-emerald-500 to-green-400';
+                borderColor = 'border-emerald-300';
+                textColor = 'text-emerald-900';
               }
 
               return (
@@ -773,7 +773,7 @@ export default function QuizPage() {
                     hasAnswered ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-105 hover:shadow-lg transform'
                   } ${bgGradient} ${borderColor} ${textColor}`}
                 >
-                  <span className="font-extrabold">{String.fromCharCode(65 + idx)}. </span>
+                  <span className="font-extrabold text-amber-200">{String.fromCharCode(65 + idx)}. </span>
                   {option}
                   {isSelected && hasAnswered && (
                     <span className="ml-3 text-xl">
@@ -789,13 +789,13 @@ export default function QuizPage() {
           </div>
 
           {hasAnswered && (
-            <div className="mt-6 rounded-xl bg-gradient-to-r from-purple-200 to-pink-200 p-5 text-center border-4 border-purple-400">
-              <p className="text-xl font-bold text-purple-900">
+            <div className="mt-6 rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 p-5 text-center border-4 border-amber-300/60">
+              <p className="text-xl font-bold text-amber-100">
                 {selectedAnswer === null
-                  ? '⏰ Time\'s up! No answer submitted. Waiting for next question...'
+                  ? '⏰ Time\'s up! No answer submitted. Awaiting next morph...'
                   : selectedAnswer === question.correctAnswer
-                  ? '🎉 Great job! Waiting for other participants...'
-                  : '✅ Answer submitted. Waiting for next question...'}
+                  ? '🎉 Nice hit! Waiting for fellow Rangers...'
+                  : '✅ Answer locked. Stand by for next question...'}
               </p>
             </div>
           )}

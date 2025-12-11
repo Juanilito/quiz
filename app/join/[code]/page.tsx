@@ -97,23 +97,23 @@ export default function JoinPage() {
 
   if (sessionExists === null) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#05070c] via-[#0b132b] to-black">
-        <div className="text-2xl font-bold text-yellow-200">Scanning Gotham skyline...</div>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
+        <div className="text-2xl font-bold text-emerald-200">Tapping into the Morphin Grid...</div>
       </div>
     );
   }
 
   if (sessionExists === false) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#05070c] via-[#0b132b] to-black">
-        <div className="rounded-2xl gotham-card p-8 shadow-2xl border border-red-500/50">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
+        <div className="rounded-2xl p-8 shadow-2xl border border-red-500/50 bg-gradient-to-br from-red-600/15 via-slate-900 to-blue-600/15">
           <h2 className="mb-4 text-3xl font-extrabold text-red-300 flex items-center gap-2">❌ Code Not Found</h2>
-          <p className="mb-6 text-xl font-semibold text-gray-200">That signal doesn&apos;t match any active quiz.</p>
+          <p className="mb-6 text-xl font-semibold text-gray-200">That morph code isn&apos;t in the Grid. Try again.</p>
           <button
             onClick={() => router.push('/')}
-            className="bat-sheen rounded-2xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-400 px-8 py-4 text-lg font-extrabold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(246,201,14,0.25)]"
+            className="rounded-2xl bg-gradient-to-r from-red-500 via-amber-400 to-yellow-400 px-8 py-4 text-lg font-extrabold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(248,113,113,0.35)]"
           >
-            Return to HQ
+            Back to Command Center
           </button>
         </div>
       </div>
@@ -121,35 +121,35 @@ export default function JoinPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#05070c] via-[#0b132b] to-black p-6">
-      <div className="pointer-events-none absolute inset-0 gotham-grid opacity-35" />
-      <div className="relative w-full max-w-md rounded-3xl gotham-card p-9 shadow-2xl border border-yellow-400/30">
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 p-6 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(239,68,68,0.12),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.12),transparent_35%),radial-gradient(circle_at_70%_70%,rgba(52,211,153,0.14),transparent_35%)]" />
+      <div className="relative w-full max-w-md rounded-3xl p-9 shadow-2xl border border-emerald-400/40 bg-gradient-to-br from-slate-900/90 via-gray-900/90 to-slate-950/90 backdrop-blur-xl">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-3xl font-black text-yellow-300 flex items-center gap-2">
-            🦇 Join Quiz
+          <h1 className="text-3xl font-black text-emerald-200 flex items-center gap-2">
+            🐉 Join the Ranger Grid
           </h1>
-          <span className="text-sm font-mono text-gray-300 bg-yellow-400/10 border border-yellow-400/30 rounded-full px-3 py-1">
+          <span className="text-sm font-mono text-emerald-200 bg-emerald-500/10 border border-emerald-400/40 rounded-full px-3 py-1">
             Code: {code}
           </span>
         </div>
 
         <p className="mb-6 text-sm text-gray-300">
-          Enter your vigilante alias and step into the Gotham quiz arena.
+          Choose your ranger call sign and enter the Morphin Grid quiz arena.
         </p>
 
         <form onSubmit={handleJoin} className="space-y-5">
           <div>
-            <label htmlFor="name" className="mb-2 block text-sm font-semibold text-yellow-200">
-              Hero Name
+            <label htmlFor="name" className="mb-2 block text-sm font-semibold text-emerald-200">
+              Ranger Name
             </label>
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Nightwing"
+              placeholder="e.g. Red Ranger"
               maxLength={50}
-              className="w-full rounded-xl border border-yellow-400/30 bg-[#0a0c13] px-4 py-4 text-lg font-semibold text-yellow-100 focus:border-yellow-300 focus:outline-none focus:ring-4 focus:ring-yellow-400/30"
+              className="w-full rounded-xl border border-emerald-400/30 bg-slate-950/70 px-4 py-4 text-lg font-semibold text-emerald-100 focus:border-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
               autoFocus
             />
           </div>
@@ -157,9 +157,9 @@ export default function JoinPage() {
           <button
             type="submit"
             disabled={isJoining || !name.trim()}
-            className="bat-sheen w-full rounded-2xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-400 px-4 py-4 text-xl font-extrabold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(246,201,14,0.25)] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full rounded-2xl bg-gradient-to-r from-red-500 via-amber-400 to-yellow-300 px-4 py-4 text-xl font-extrabold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(248,113,113,0.35)] disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {isJoining ? 'Dropping into Gotham...' : 'Join the Mission'}
+            {isJoining ? 'Syncing with Zordon...' : 'Join the Squad'}
           </button>
         </form>
       </div>

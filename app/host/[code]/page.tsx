@@ -610,10 +610,10 @@ export default function HostPage() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-          <div className="text-xl font-bold text-cyan-400 cyberpunk-flicker">Loading Battle Arena...</div>
+          <div className="w-12 h-12 border-4 border-red-400 border-t-transparent rounded-full animate-spin"></div>
+          <div className="text-xl font-bold text-amber-300 cyberpunk-flicker">Charging the Morphin Grid...</div>
         </div>
       </div>
     );
@@ -621,11 +621,11 @@ export default function HostPage() {
 
   if (!session) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
         <div className="text-center">
           <div className="text-6xl mb-4">💀</div>
-          <div className="text-2xl font-bold text-red-400 anime-glow">Battle Arena Not Found</div>
-          <div className="text-gray-400 mt-2">The quiz session you're looking for doesn't exist</div>
+          <div className="text-2xl font-bold text-red-400 anime-glow">Command Center Offline</div>
+          <div className="text-gray-400 mt-2">This morph code doesn&apos;t map to an active session.</div>
         </div>
       </div>
     );
@@ -659,27 +659,28 @@ export default function HostPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 md:p-8 relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 p-4 md:p-8 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl anime-float"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl anime-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-red-500/8 rounded-full blur-3xl anime-float"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-blue-500/8 rounded-full blur-3xl anime-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-6 left-12 w-40 h-40 bg-amber-400/10 rounded-full blur-3xl anime-float" style={{animationDelay: '2s'}}></div>
       </div>
 
       <div className="mx-auto max-w-4xl relative z-10">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl flex items-center justify-center anime-glow">
-              <span className="text-2xl">👑</span>
+            <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-amber-400 rounded-xl flex items-center justify-center anime-glow">
+              <span className="text-2xl">🛡️</span>
             </div>
             <div>
-              <h1 className="text-4xl font-black anime-text-gradient">ホストダッシュボード</h1>
-              <div className="text-sm text-cyan-400 font-mono">Host Control Center</div>
+              <h1 className="text-4xl font-black bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 bg-clip-text text-transparent">Ranger Command</h1>
+              <div className="text-sm text-emerald-300 font-mono">Host the Morphin Quiz</div>
             </div>
           </div>
           <div className="flex flex-col items-end gap-3">
-            <div className="font-mono font-bold text-cyan-300 bg-slate-800/80 px-4 py-2 rounded-xl border border-cyan-400/50 anime-glow-blue backdrop-blur-sm">
-              CODE: {code}
+            <div className="font-mono font-bold text-amber-200 bg-slate-800/80 px-4 py-2 rounded-xl border border-amber-400/60 anime-glow-blue backdrop-blur-sm">
+              MORPH CODE: {code}
             </div>
             <div className="flex items-center gap-3">
               <ConnectionStatus isRealtime={useRealtime} lastUpdate={lastUpdate} />
@@ -688,31 +689,31 @@ export default function HostPage() {
                   loadSession();
                   setLastUpdate(new Date());
                 }}
-                className="text-sm bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 anime-glow-blue border border-blue-400/50"
+                className="text-sm bg-gradient-to-r from-red-500 to-amber-400 text-gray-900 px-4 py-2 rounded-lg hover:from-red-400 hover:to-amber-300 transition-all duration-300 anime-glow-blue border border-amber-300/60"
               >
                 <span className="flex items-center gap-1">
                   <span>🔄</span>
-                  <span>REFRESH</span>
+                  <span>REFRESH GRID</span>
                 </span>
               </button>
             </div>
           </div>
         </div>
 
-        <div className="mb-6 rounded-2xl backdrop-blur-xl p-6 border border-white/10 anime-glow"
+        <div className="mb-6 rounded-2xl backdrop-blur-xl p-6 border border-amber-300/30 anime-glow"
              style={{
-               background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%)',
-               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 107, 157, 0.1)'
+               background: 'linear-gradient(135deg, rgba(18, 18, 28, 0.95) 0%, rgba(26, 32, 44, 0.9) 100%)',
+               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(248, 113, 113, 0.15)'
              }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-              <span className="text-cyan-400">👥</span>
-              <span>参戦者</span>
-              <span className="text-cyan-400 font-mono">({participants.length})</span>
+              <span className="text-amber-300">👥</span>
+              <span>Ranger Roster</span>
+              <span className="text-amber-200 font-mono">({participants.length})</span>
             </h2>
-            <div className="text-lg font-mono text-purple-400">
+            <div className="text-lg font-mono text-emerald-200">
               <span>📝</span>
-              <span>解答: {currentAnswers.length}/{participants.length}</span>
+              <span>Answers: {currentAnswers.length}/{participants.length}</span>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -733,20 +734,20 @@ export default function HostPage() {
                   borderColor = 'border-green-400';
                   glowColor = 'anime-glow';
                   statusIcon = '✅';
-                  statusText = '正解';
+                  statusText = 'Correct';
                 } else {
                   bgGradient = 'bg-gradient-to-br from-red-900/80 to-pink-900/80';
                   borderColor = 'border-red-400';
                   glowColor = 'anime-glow';
                   statusIcon = '❌';
-                  statusText = '不正解';
+                  statusText = 'Incorrect';
                 }
               }
 
               return (
                 <div
                   key={p.id}
-                  className={`rounded-xl ${bgGradient} px-4 py-3 text-center text-base font-bold text-purple-900 border-2 ${borderColor} shadow-md relative`}
+                  className={`rounded-xl ${bgGradient} px-4 py-3 text-center text-base font-bold text-amber-100 border-2 ${borderColor} shadow-md relative`}
                 >
                   {p.name}
                   {statusIcon && (
@@ -761,38 +762,38 @@ export default function HostPage() {
         </div>
 
         {isWaiting && (
-          <div className="rounded-2xl backdrop-blur-xl p-8 text-center border border-white/10 anime-glow"
+          <div className="rounded-2xl backdrop-blur-xl p-8 text-center border border-amber-300/30 anime-glow"
                style={{
-                 background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%)',
-                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2)'
+                 background: 'linear-gradient(135deg, rgba(18, 18, 28, 0.95) 0%, rgba(26, 32, 44, 0.9) 100%)',
+                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(252, 211, 77, 0.2)'
                }}>
             <div className="mb-6">
-              <h2 className="text-3xl font-black anime-text-gradient-2 mb-2">準備完了？</h2>
-              <div className="text-cyan-400 font-mono text-sm">Ready to Battle?</div>
+              <h2 className="text-3xl font-black bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 bg-clip-text text-transparent mb-2">Ready to Morph?</h2>
+              <div className="text-emerald-300 font-mono text-sm">Grid synced. Waiting on Zordon.</div>
             </div>
             <div className="mb-8">
               <div className="text-2xl font-bold text-white mb-2">
-                {participants.length}人の戦士が参戦
+                {participants.length} ranger{participants.length !== 1 ? 's' : ''} assembled
               </div>
               <div className="text-gray-400 text-sm">
-                {participants.length} warrior{participants.length !== 1 ? 's' : ''} ready for battle
+                {participants.length} ready to defend Angel Grove
               </div>
             </div>
             <button
               onClick={startQuiz}
               disabled={isStarting}
-              className="rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 px-10 py-4 text-xl font-bold text-white transition-all duration-300 hover:scale-110 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed transform anime-glow border-2 border-pink-400/50 hover:border-cyan-400/70"
+              className="rounded-2xl bg-gradient-to-r from-red-500 via-amber-400 to-yellow-300 px-10 py-4 text-xl font-bold text-gray-900 transition-all duration-300 hover:scale-110 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed transform anime-glow border-2 border-amber-300/60 hover:border-yellow-200"
             >
               {isStarting ? (
                 <div className="flex items-center justify-center gap-3">
                   <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span>バトル開始中...</span>
+                  <span>Initiating Morph Sequence...</span>
                 </div>
               ) : (
                 <div className="flex items-center justify-center gap-3">
-                  <span>🚀</span>
-                  <span>バトル開始</span>
                   <span>⚡</span>
+                  <span>Start Quiz</span>
+                  <span>🟥</span>
                 </div>
               )}
             </button>
@@ -807,20 +808,20 @@ export default function HostPage() {
                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(155, 89, 182, 0.2)'
                  }}>
               <div className="mb-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center anime-glow-blue">
-                    <span className="text-white font-bold text-sm">Q</span>
-                  </div>
-                  <span className="text-lg font-bold text-cyan-400 font-mono">
-                    問題 {questionIndex + 1} / {TOTAL_QUESTIONS}
-                  </span>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-amber-400 rounded-lg flex items-center justify-center anime-glow">
+                  <span className="text-white font-bold text-sm">Q</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-sm text-gray-400">残り時間</div>
-                  <span className="text-2xl font-mono font-bold text-pink-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-pink-400/50 anime-glow backdrop-blur-sm">
-                    ⏱️ {Math.ceil(timeRemaining / 1000)}s
-                  </span>
-                </div>
+                <span className="text-lg font-bold text-amber-200 font-mono">
+                  Question {questionIndex + 1} / {TOTAL_QUESTIONS}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="text-sm text-gray-400">Time remaining</div>
+                <span className="text-2xl font-mono font-bold text-gray-900 bg-amber-300 px-4 py-2 rounded-xl border border-amber-200 anime-glow backdrop-blur-sm">
+                  ⏱️ {Math.ceil(timeRemaining / 1000)}s
+                </span>
+              </div>
               </div>
 
               <div className="mb-8 h-4 w-full overflow-hidden rounded-full bg-slate-700 border-2 border-cyan-400/50">
@@ -845,7 +846,7 @@ export default function HostPage() {
                     <span className="font-mono font-bold text-cyan-400 mr-3">{String.fromCharCode(65 + idx)}. </span>
                     <span>{option}</span>
                     {idx === question.correctAnswer && (
-                      <span className="ml-3 text-green-400 font-bold">✓ 正解</span>
+                      <span className="ml-3 text-green-400 font-bold">✓ Correct</span>
                     )}
                   </div>
                 ))}
@@ -855,21 +856,21 @@ export default function HostPage() {
             <div className="flex gap-4">
               <button
                 onClick={showRankings}
-                className="flex-1 rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-4 text-lg font-extrabold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl transform anime-glow border-2 border-yellow-400/50 hover:border-orange-400"
+                className="flex-1 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-300 px-6 py-4 text-lg font-extrabold text-gray-900 transition-all duration-300 hover:scale-105 hover:shadow-2xl transform anime-glow border-2 border-amber-200/60 hover:border-yellow-200"
               >
                 <div className="flex items-center justify-center gap-2">
                   <span>📊</span>
-                  <span>ランキング表示</span>
+                  <span>Show Rankings</span>
                 </div>
               </button>
               <button
                 onClick={startNextQuestion}
-                className="flex-1 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 px-6 py-4 text-lg font-extrabold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl transform anime-glow border-2 border-pink-400/50 hover:border-cyan-400"
+                className="flex-1 rounded-2xl bg-gradient-to-r from-red-500 via-blue-500 to-emerald-500 px-6 py-4 text-lg font-extrabold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl transform anime-glow border-2 border-red-400/50 hover:border-emerald-400"
               >
                 <div className="flex items-center justify-center gap-2">
                   <span>➡️</span>
-                  <span>次の問題</span>
-                  <span>⚡</span>
+                  <span>Next Question</span>
+                  <span>⚡️</span>
                 </div>
               </button>
             </div>
