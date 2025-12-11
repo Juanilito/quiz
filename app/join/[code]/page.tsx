@@ -97,23 +97,37 @@ export default function JoinPage() {
 
   if (sessionExists === null) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#05070c] via-[#0b132b] to-black">
-        <div className="text-2xl font-bold text-yellow-200">Scanning Gotham skyline...</div>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+          <div className="text-xl font-bold text-cyan-400 cyberpunk-flicker">システム接続中...</div>
+        </div>
       </div>
     );
   }
 
   if (sessionExists === false) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#05070c] via-[#0b132b] to-black">
-        <div className="rounded-2xl gotham-card p-8 shadow-2xl border border-red-500/50">
-          <h2 className="mb-4 text-3xl font-extrabold text-red-300 flex items-center gap-2">❌ Code Not Found</h2>
-          <p className="mb-6 text-xl font-semibold text-gray-200">That signal doesn&apos;t match any active quiz.</p>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="rounded-2xl backdrop-blur-xl p-8 text-center border border-white/10 anime-glow"
+             style={{
+               background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%)',
+               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(239, 68, 68, 0.2)'
+             }}>
+          <div className="mb-6">
+            <h2 className="text-3xl font-black anime-text-gradient-2 mb-2">❌ コードが見つかりません</h2>
+            <div className="text-cyan-400 font-mono text-sm">Code Not Found</div>
+          </div>
+          <p className="mb-8 text-xl font-semibold text-gray-300">そのコードは無効です。</p>
           <button
             onClick={() => router.push('/')}
-            className="bat-sheen rounded-2xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-400 px-8 py-4 text-lg font-extrabold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(246,201,14,0.25)]"
+            className="rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 px-8 py-4 text-lg font-extrabold text-white transition-all duration-300 hover:scale-110 hover:shadow-2xl transform anime-glow border-2 border-pink-400/50 hover:border-cyan-400"
           >
-            Return to HQ
+            <div className="flex items-center justify-center gap-2">
+              <span>🏠</span>
+              <span>ホームに戻る</span>
+              <span>⚡</span>
+            </div>
           </button>
         </div>
       </div>
@@ -121,47 +135,88 @@ export default function JoinPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#05070c] via-[#0b132b] to-black p-6">
-      <div className="pointer-events-none absolute inset-0 gotham-grid opacity-35" />
-      <div className="relative w-full max-w-md rounded-3xl gotham-card p-9 shadow-2xl border border-yellow-400/30">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-3xl font-black text-yellow-300 flex items-center gap-2">
-            🦇 Join Quiz
-          </h1>
-          <span className="text-sm font-mono text-gray-300 bg-yellow-400/10 border border-yellow-400/30 rounded-full px-3 py-1">
-            Code: {code}
-          </span>
-        </div>
+    <div className="flex min-h-screen items-center justify-center p-4 relative">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl anime-float"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl anime-float" style={{animationDelay: '1.5s'}}></div>
+      </div>
 
-        <p className="mb-6 text-sm text-gray-300">
-          Enter your vigilante alias and step into the Gotham quiz arena.
-        </p>
+      <div className="w-full max-w-md relative z-10">
+        {/* Main card with glassmorphism effect */}
+        <div className="rounded-3xl backdrop-blur-xl p-8 border border-white/10 anime-glow"
+             style={{
+               background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%)',
+               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 107, 157, 0.1)'
+             }}>
 
-        <form onSubmit={handleJoin} className="space-y-5">
-          <div>
-            <label htmlFor="name" className="mb-2 block text-sm font-semibold text-yellow-200">
-              Hero Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Nightwing"
-              maxLength={50}
-              className="w-full rounded-xl border border-yellow-400/30 bg-[#0a0c13] px-4 py-4 text-lg font-semibold text-yellow-100 focus:border-yellow-300 focus:outline-none focus:ring-4 focus:ring-yellow-400/30"
-              autoFocus
-            />
+          {/* Title with anime styling */}
+          <div className="mb-6 text-center">
+            <h1 className="text-4xl font-black anime-text-gradient mb-2">
+              参戦
+            </h1>
+            <h2 className="text-2xl font-bold text-white mb-2 cyberpunk-flicker">
+              JOIN QUIZ
+            </h2>
+            <div className="flex justify-center items-center gap-2 text-cyan-400 font-mono">
+              <span className="w-2 h-2 bg-cyan-400 rounded-full anime-pulse-glow"></span>
+              <span className="text-sm">バトルレディ</span>
+              <span className="w-2 h-2 bg-cyan-400 rounded-full anime-pulse-glow"></span>
+            </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={isJoining || !name.trim()}
-            className="bat-sheen w-full rounded-2xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-400 px-4 py-4 text-xl font-extrabold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(246,201,14,0.25)] disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {isJoining ? 'Dropping into Gotham...' : 'Join the Mission'}
-          </button>
-        </form>
+          {/* Code display */}
+          <div className="mb-6 text-center">
+            <div className="font-mono font-bold text-cyan-300 bg-slate-800/80 px-4 py-2 rounded-xl border border-cyan-400/50 anime-glow-blue backdrop-blur-sm">
+              CODE: {code}
+            </div>
+          </div>
+
+          <form onSubmit={handleJoin} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="mb-2 block text-lg font-bold text-cyan-300">
+                プレイヤー名
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="あなたの名前を入力"
+                maxLength={50}
+                className="w-full rounded-xl border-2 border-cyan-400/50 px-4 py-4 text-lg font-bold text-cyan-300 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30 bg-slate-800/50 backdrop-blur-sm placeholder:text-cyan-600/50 transition-all duration-300"
+                autoFocus
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isJoining || !name.trim()}
+              className="w-full rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-600 px-6 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed transform anime-glow-blue border border-cyan-400/50 hover:border-cyan-300"
+            >
+              {isJoining ? (
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>参戦中...</span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-3">
+                  <span>⚔️</span>
+                  <span>参戦する</span>
+                  <span>⚡</span>
+                </div>
+              )}
+            </button>
+          </form>
+
+          {/* Floating particles effect */}
+          <div className="absolute -inset-4 pointer-events-none">
+            <div className="absolute top-4 left-4 w-2 h-2 bg-pink-400 rounded-full opacity-60 anime-float"></div>
+            <div className="absolute top-8 right-8 w-1 h-1 bg-cyan-400 rounded-full opacity-40 anime-float" style={{animationDelay: '0.5s'}}></div>
+            <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-50 anime-float" style={{animationDelay: '1.5s'}}></div>
+            <div className="absolute bottom-4 right-4 w-2 h-2 bg-cyan-400 rounded-full opacity-70 anime-float" style={{animationDelay: '2.5s'}}></div>
+          </div>
+        </div>
       </div>
     </div>
   );

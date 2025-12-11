@@ -137,7 +137,7 @@ export default function HostPage() {
         },
         (payload) => {
           if (!realtimeWorking) {
-            realtimeWorking = true;
+          realtimeWorking = true;
             setUseRealtime(true);
             console.log('✅ Host: Realtime now working, stopping polling fallback');
             if (stopPolling) {
@@ -210,29 +210,29 @@ export default function HostPage() {
         stopPolling = realtimeFallback.pollSession(code, (data) => {
           if (!realtimeWorking) { // Only use polling data if realtime isn't working
             console.log('🔄 Host: Session update received via polling', {
-              status: data.status,
-              questionIndex: data.current_question_index
-            });
+        status: data.status,
+        questionIndex: data.current_question_index
+      });
 
-            setSession((prevSession: any) => {
-              if (prevSession?.status !== data.status ||
-                  prevSession?.current_question_index !== data.current_question_index ||
-                  prevSession?.question_start_time !== data.question_start_time) {
-                console.log('📊 Host: Updating session from polling');
+      setSession((prevSession: any) => {
+        if (prevSession?.status !== data.status ||
+            prevSession?.current_question_index !== data.current_question_index ||
+            prevSession?.question_start_time !== data.question_start_time) {
+          console.log('📊 Host: Updating session from polling');
                 setLastUpdate(new Date());
-                return data;
-              }
-              return prevSession;
-            });
+          return data;
+        }
+        return prevSession;
+      });
 
-            if (data.status === 'active') {
-              setCurrentQuestion(data.current_question_index);
-              if (data.question_start_time) {
-                setQuestionStartTime(new Date(data.question_start_time));
+      if (data.status === 'active') {
+        setCurrentQuestion(data.current_question_index);
+        if (data.question_start_time) {
+          setQuestionStartTime(new Date(data.question_start_time));
               }
-            }
-          }
-        });
+        }
+      }
+    });
       }
     };
 
@@ -252,7 +252,7 @@ export default function HostPage() {
         sessionChannelRef.current = null;
       }
       if (stopPolling) {
-        stopPolling();
+      stopPolling();
         stopPolling = null;
         pollingActive = false;
       }
@@ -304,7 +304,7 @@ export default function HostPage() {
         },
         async (payload) => {
           if (!realtimeWorking) {
-            realtimeWorking = true;
+          realtimeWorking = true;
             console.log('✅ Host: Realtime participants now working, stopping polling');
             if (stopPolling && pollingActive) {
               stopPolling();
@@ -374,7 +374,7 @@ export default function HostPage() {
         participantsChannelRef.current = null;
       }
       if (stopPolling) {
-        stopPolling();
+      stopPolling();
         stopPolling = null;
         pollingActive = false;
       }
@@ -811,18 +811,18 @@ export default function HostPage() {
                   <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center anime-glow-blue">
                     <span className="text-white font-bold text-sm">Q</span>
                   </div>
-                  <span className="text-lg font-bold text-cyan-400 font-mono">
-                    問題 {questionIndex + 1} / {TOTAL_QUESTIONS}
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-sm text-gray-400">残り時間</div>
-                  <span className="text-2xl font-mono font-bold text-pink-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-pink-400/50 anime-glow backdrop-blur-sm">
-                    ⏱️ {Math.ceil(timeRemaining / 1000)}s
-                  </span>
-                </div>
+                <span className="text-lg font-bold text-cyan-400 font-mono">
+                  問題 {questionIndex + 1} / {TOTAL_QUESTIONS}
+                </span>
               </div>
-
+              <div className="flex items-center gap-3">
+                <div className="text-sm text-gray-400">残り時間</div>
+                <span className="text-2xl font-mono font-bold text-pink-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-pink-400/50 anime-glow backdrop-blur-sm">
+                  ⏱️ {Math.ceil(timeRemaining / 1000)}s
+                </span>
+              </div>
+              </div>
+              
               <div className="mb-8 h-4 w-full overflow-hidden rounded-full bg-slate-700 border-2 border-cyan-400/50">
                 <div
                   className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 transition-all duration-100 anime-glow"
@@ -831,7 +831,7 @@ export default function HostPage() {
               </div>
 
               <h2 className="mb-8 text-3xl font-bold text-white leading-tight">{question.question}</h2>
-
+              
               <div className="space-y-4">
                 {question.options.map((option, idx) => (
                   <div
